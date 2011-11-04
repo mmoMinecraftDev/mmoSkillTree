@@ -14,10 +14,10 @@
 
 	<!-- Project information -->
 	<groupId>mmo.SkillTree</groupId>
-	<artifactId>skillTree</artifactId>
-	<name>skillTree</name>
+	<artifactId>mmoSkillTree</artifactId>
+	<name>mmoSkillTree</name>
 	<version>dev</version>
-	<url>https://github.com/mmoMinecraftDev/mmoSkillTree</url>
+	<url>http://github.com/mmoMinecraftDev/mmoSkillTree</url>
 	<description>mmoSkillTree provides a user interface and configurable skill obtainment dependencies.</description>
 
 	<properties>
