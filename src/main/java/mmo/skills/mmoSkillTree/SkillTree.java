@@ -6,7 +6,6 @@ import org.bukkit.event.Event.Priority;
 import org.bukkit.event.Event.Type;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
-//import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -21,7 +20,7 @@ import mmo.Core.MMOPlugin;
 import mmo.skills.mmoSkillTree.Events.BlockXpListener;
 import mmo.skills.mmoSkillTree.Events.CombatXpListener;
 
-public class SkillTree extends MMOPlugin/*JavaPlugin*/ {
+public class SkillTree extends MMOPlugin {
 	
 	public static SkillTree plugin;
 	

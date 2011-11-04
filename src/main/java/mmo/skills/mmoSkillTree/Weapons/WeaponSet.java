@@ -13,7 +13,7 @@ public enum WeaponSet {
 	
 	Pickaxe(SkillSet.Piercing, SkillSet.Tool),
 	
-	Shovel(SkillSet.Bashing,SkillSet.Tool),
+	Shovel(SkillSet.Bashing, SkillSet.Tool),
 	
 	Sword(SkillSet.Slashing),
 	
@@ -21,14 +21,16 @@ public enum WeaponSet {
 	
 	Spear(SkillSet.Piercing),
 	
-	Polearm(SkillSet.Slashing);
+	Polearm(SkillSet.Slashing),
+        
+        Unarmed(SkillSet.Unarmed, SkillSet.Tool);
 	
 	private ArrayList<SkillSet> skillSets = new ArrayList<SkillSet>();
 	
 	static final List<String> list = new ArrayList<String>();
 	
 	private WeaponSet(final SkillSet... skillSets) {
-		for( SkillSet s : skillSets ) {
+		for( SkillSet s : skillSets ){
 			this.skillSets.add(s);
 		}
 	}

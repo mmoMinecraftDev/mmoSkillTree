@@ -86,7 +86,7 @@ public class BlockXpListener extends BlockListener {
 		else if( id == 261 )
 			return WeaponSet.Bow;
 		else
-			return null;
+			return WeaponSet.Unarmed;
 	}
 	
 }

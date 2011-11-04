@@ -26,11 +26,13 @@ public class CombatXpListener extends MMOListener {
 		if( attacker instanceof Player ){
 			Player p = (Player) attacker;
 			ItemStack wielding = p.getItemInHand();
-			WeaponSet weaponSet = itemSet(wielding);
-			int expVal = dmg;
-			
-			MMOPlayer mmoPlayer = plugin.mmoPlayerManager.get(p); 
-			mmoPlayer.addXp(expVal, weaponSet.getCombatSkillSet());
+                        if( wielding != null){
+                            WeaponSet weaponSet = itemSet(wielding);
+                            int expVal = dmg;
+
+                            MMOPlayer mmoPlayer = plugin.mmoPlayerManager.get(p); 
+                            mmoPlayer.addXp(expVal, weaponSet.getCombatSkillSet());
+                        }
 		}
 	}
 	
@@ -52,6 +54,6 @@ public class CombatXpListener extends MMOListener {
 		else if( id == 261 )
 			return WeaponSet.Bow;
 		else
-			return null;
+			return WeaponSet.Unarmed; //This is actually going to make anything but the weapons count as tools, pretty much.  So you can hit with blocks to gain tool or unarmed combat xp
 	}
 }
