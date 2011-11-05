@@ -1,6 +1,6 @@
-package mmo.skills.mmoSkillTree.GUI;
+package mmo.SkillTree.GUI;
 
-import mmo.skills.mmoSkillTree.Skills.SkillType;
+import mmo.SkillTree.Skills.SkillType;
 
 import org.getspout.spoutapi.gui.Container;
 import org.getspout.spoutapi.gui.ContainerType;

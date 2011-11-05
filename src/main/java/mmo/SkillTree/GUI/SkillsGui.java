@@ -1,10 +1,11 @@
-package mmo.skills.mmoSkillTree.GUI;
+package mmo.SkillTree.GUI;
 
 import java.util.logging.Logger;
 
-import mmo.skills.mmoSkillTree.SkillTree;
-import mmo.skills.mmoSkillTree.Skills.SkillSet;
-import mmo.skills.mmoSkillTree.Skills.Tree;
+import mmo.Core.MMOPlugin;
+import mmo.SkillTree.MMOSkillTree;
+import mmo.SkillTree.Skills.SkillSet;
+import mmo.SkillTree.Skills.Tree;
 
 import org.bukkit.entity.Player;
 import org.getspout.spoutapi.SpoutManager;
@@ -23,35 +24,34 @@ import org.getspout.spoutapi.gui.Screen;
 import org.getspout.spoutapi.gui.WidgetAnchor;
 
 public class SkillsGui {
-	
-	private static SkillTree plugin;
-	
-	public final Logger logger = Logger.getLogger("Minecraft");
-	
-	public SkillsGui(SkillTree plugin) {
+
+	private static MMOPlugin plugin;
+	public static final Logger logger = Logger.getLogger("Minecraft");
+
+	public SkillsGui(MMOPlugin plugin) {
 		SkillsGui.setPlugin(plugin);
 	}
-	
 	static GenericPopup skillTreePopup;
 	static Tree curTab;
 
-	public void skillHint(Player player){
+	public void skillHint(Player player) {
 		SpoutPlayer sPlayer = SpoutManager.getPlayer(player);
-		
+
 		GenericLabel label = new GenericLabel("Press \"K\" to open Skills");
-		label.setTextColor(new Color(1.0F, 0.3F, 0.15F, 1.0F)); 
+		label.setTextColor(new Color(1.0F, 0.3F, 0.15F, 1.0F));
 		label.setAlign(WidgetAnchor.BOTTOM_RIGHT).setAnchor(WidgetAnchor.BOTTOM_RIGHT);
 		sPlayer.getMainScreen().attachWidget(getPlugin(), label);
 	}
-	
-	public void openSkillTree(Player player){
-		if( plugin == null )
+
+	public void openSkillTree(Player player) {
+		if (plugin == null) {
 			this.logger.info("plugin is null.");
+		}
 		SpoutPlayer sPlayer = SpoutManager.getPlayer(player);
-		
+
 		GenericPopup popup = new GenericPopup();
 		skillTreePopup = popup;
-		
+
 		GenericTexture bg = new GenericTexture();
 		bg.setUrl("SkillTree.png");
 		bg.setWidth(300).setHeight(230);
@@ -59,13 +59,13 @@ public class SkillsGui {
 		bg.setPriority(RenderPriority.Highest);
 		bg.setAnchor(WidgetAnchor.TOP_CENTER);
 		popup.attachWidget(getPlugin(), bg);
-		
+
 		Container tabs = new GenericContainer();
 		tabs.setLayout(ContainerType.VERTICAL);
 		tabs.setWidth(50).setHeight(230);
 		tabs.setAnchor(WidgetAnchor.TOP_CENTER);
 		tabs.setX(91).setY(11);
-		
+
 		createTab(tabs, SkillSet.Bashing);
 		createTab(tabs, SkillSet.Piercing);
 		createTab(tabs, SkillSet.Slashing);
@@ -75,44 +75,46 @@ public class SkillsGui {
 		createTab(tabs, SkillSet.Empathy);
 		createTab(tabs, SkillSet.Tool);
 		createTab(tabs, SkillSet.Smithing);
-		
+
 		popup.attachWidget(getPlugin(), tabs);
-		
+
 		sPlayer.getMainScreen().attachPopupScreen(popup);
 	}
-	
-	public boolean skillTreeIsOpen(Screen screen){
-		if( skillTreePopup == null )
+
+	public boolean skillTreeIsOpen(Screen screen) {
+		if (skillTreePopup == null) {
 			return false;
-		if( skillTreePopup == ((InGameHUD) screen).getActivePopup() )
+		}
+		if (skillTreePopup == ((InGameHUD) screen).getActivePopup()) {
 			return true;
-		else
+		} else {
 			return false;
+		}
 	}
-	
-	public void closeSkillTree(){
+
+	public void closeSkillTree() {
 		skillTreePopup.close();
 	}
-	
-	public void switchSkillTreeTab(TreeTabButton button, SpoutPlayer sPlayer){
-		if( curTab != null ){
+
+	public void switchSkillTreeTab(TreeTabButton button, SpoutPlayer sPlayer) {
+		if (curTab != null) {
 			curTab.close();
 			curTab = null;
 		}
 		SkillSet skillSet = button.getSkillSet();
-		curTab = new Tree(skillTreePopup, sPlayer, skillSet);
+		curTab = new Tree(plugin, skillTreePopup, sPlayer, skillSet);
 	}
-	
-	public void createTab(Container box, SkillSet skillSet){
+
+	public void createTab(Container box, SkillSet skillSet) {
 		String name = skillSet.toString();
-		
+
 		Container outter = new GenericContainer();
 		outter.setAlign(WidgetAnchor.CENTER_CENTER);
 		Container buttonStack = new GenericContainer();
 		buttonStack.setLayout(ContainerType.OVERLAY);
 		buttonStack.setMargin(2, 0, 0, 2);
 		buttonStack.shiftXPos(buttonStack.getWidth() / -2);
-		
+
 		TreeTabButton tabButton = new TreeTabButton(skillSet);
 		buttonStack.addChild(tabButton);
 		/*GenericButton button = new GenericButton("");
@@ -120,30 +122,31 @@ public class SkillsGui {
 		button.setTooltip(name + " Skills");
 		button.setPriority(RenderPriority.High);
 		buttonStack.addChild(button);*/
-		
+
 		GenericTexture tex = new GenericTexture();
 		tex.setUrl(name + ".png");
 		tex.setWidth(16).setHeight(16).setFixed(true);
-		tex.setMargin(2,22,3,2);
+		tex.setMargin(2, 22, 3, 2);
 		tex.setPriority(RenderPriority.Normal);
 		buttonStack.addChild(tex);
-		
+
 		GenericLabel label = new GenericLabel();
 		label.setText(name + "\nSkills");
 		label.setPriority(RenderPriority.Normal);
 		label.setWidth(22);
-		label.setMargin(3,2,3,19);
+		label.setMargin(3, 2, 3, 19);
 		label.setScale(0.8F);
 		buttonStack.addChild(label);
-		
+
 		outter.addChild(buttonStack);
 		box.addChild(outter);
 	}
-	
-	public static SkillTree getPlugin() {
+
+	public static MMOPlugin getPlugin() {
 		return plugin;
 	}
-	public static void setPlugin(SkillTree plugin) {
+
+	public static void setPlugin(MMOPlugin plugin) {
 		SkillsGui.plugin = plugin;
 	}
 }

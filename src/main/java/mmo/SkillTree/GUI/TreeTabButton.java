@@ -1,6 +1,6 @@
-package mmo.skills.mmoSkillTree.GUI;
+package mmo.SkillTree.GUI;
 
-import mmo.skills.mmoSkillTree.Skills.SkillSet;
+import mmo.SkillTree.Skills.SkillSet;
 
 import org.getspout.spoutapi.gui.GenericButton;
 import org.getspout.spoutapi.gui.RenderPriority;

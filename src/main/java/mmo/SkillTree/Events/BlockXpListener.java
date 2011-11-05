@@ -1,11 +1,11 @@
-package mmo.skills.mmoSkillTree.Events;
+package mmo.SkillTree.Events;
 
 import java.util.HashMap;
 
-import mmo.skills.mmoSkillTree.MMOPlayer;
-import mmo.skills.mmoSkillTree.SkillTree;
-import mmo.skills.mmoSkillTree.Skills.SkillSet;
-import mmo.skills.mmoSkillTree.Weapons.WeaponSet;
+import mmo.SkillTree.MMOPlayer;
+import mmo.SkillTree.MMOSkillTree;
+import mmo.SkillTree.Skills.SkillSet;
+import mmo.SkillTree.Weapons.WeaponSet;
 
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockListener;
@@ -14,15 +14,18 @@ import org.bukkit.block.Block;
 import org.getspout.spoutapi.player.SpoutPlayer;
 
 public class BlockXpListener extends BlockListener {
-	private static SkillTree plugin;
-	public BlockXpListener(){
-		plugin = SkillTree.plugin;
+
+	private static MMOSkillTree plugin;
+
+	public BlockXpListener(MMOSkillTree plugin) {
+		BlockXpListener.plugin = plugin;
 	}
-	
+
 	@Override
-	public void onBlockBreak(BlockBreakEvent event){
-		if (event.isCancelled())
-            return;
+	public void onBlockBreak(BlockBreakEvent event) {
+		if (event.isCancelled()) {
+			return;
+		}
 		SpoutPlayer p = (SpoutPlayer) event.getPlayer();
 		Block block = event.getBlock();
 		ItemStack wielding = p.getItemInHand();
@@ -52,41 +55,43 @@ public class BlockXpListener extends BlockListener {
 		digging.put(88, 35);//soul sand
 		HashMap<Integer, Integer> chopping = new HashMap<Integer, Integer>();
 		chopping.put(17, 50);//all wood
-		
+
 		WeaponSet weaponSet = itemSet(wielding);
-		if( weaponSet.is(SkillSet.Tool) ){
+		if (weaponSet.is(SkillSet.Tool)) {
 			int blockId = block.getTypeId();
 			int expVal = chopping.containsKey(blockId) ? chopping.get(blockId) : 0;
-			if( expVal == 0 )
+			if (expVal == 0) {
 				expVal = digging.containsKey(blockId) ? digging.get(blockId) : 0;
-			if( expVal == 0 )
+			}
+			if (expVal == 0) {
 				expVal = mining.containsKey(blockId) ? mining.get(blockId) : 0;
-			if( expVal > 0 ){
-				MMOPlayer mmoPlayer = plugin.mmoPlayerManager.get(p); 
+			}
+			if (expVal > 0) {
+				MMOPlayer mmoPlayer = MMOSkillTree.mmoPlayerManager.get(p);
 				mmoPlayer.addXp(expVal, SkillSet.Tool);
 			}
 		}
 	}
-	
+
 	/*
 	 * TODO: Extend item set to return this. :( Need to know what weaponSet an item is all over.
 	 */
-	private WeaponSet itemSet(ItemStack wielding){
+	private WeaponSet itemSet(ItemStack wielding) {
 		int id = wielding.getTypeId();
-		if( id == 278/*diamond*/ || id == 257/*iron*/ || id == 285/*gold*/ || id == 274/*stone*/ || id == 270/*wood*/)
+		if (id == 278/*diamond*/ || id == 257/*iron*/ || id == 285/*gold*/ || id == 274/*stone*/ || id == 270/*wood*/) {
 			return WeaponSet.Pickaxe;
-		else if( id == 277/*diamond*/ || id == 256/*iron*/ || id == 285/*gold*/ || id == 273/*stone*/ || id == 269/*wood*/)
+		} else if (id == 277/*diamond*/ || id == 256/*iron*/ || id == 285/*gold*/ || id == 273/*stone*/ || id == 269/*wood*/) {
 			return WeaponSet.Shovel;
-		else if( id == 279/*diamond*/ || id == 258/*iron*/ || id == 286/*gold*/ || id == 275/*stone*/ || id == 271/*wood*/)
+		} else if (id == 279/*diamond*/ || id == 258/*iron*/ || id == 286/*gold*/ || id == 275/*stone*/ || id == 271/*wood*/) {
 			return WeaponSet.Axe;
-		else if( id == 290 || id == 291 || id == 292 || id == 293 || id == 294 )
+		} else if (id == 290 || id == 291 || id == 292 || id == 293 || id == 294) {
 			return WeaponSet.Hoe;
-		else if( id == 268/*wood*/ || id == 272/*stone*/ || id == 267/*iron*/ || id == 283/*gold*/ || id == 276/*diamond*/ )
+		} else if (id == 268/*wood*/ || id == 272/*stone*/ || id == 267/*iron*/ || id == 283/*gold*/ || id == 276/*diamond*/) {
 			return WeaponSet.Sword;
-		else if( id == 261 )
+		} else if (id == 261) {
 			return WeaponSet.Bow;
-		else
+		} else {
 			return WeaponSet.Unarmed;
+		}
 	}
-	
 }

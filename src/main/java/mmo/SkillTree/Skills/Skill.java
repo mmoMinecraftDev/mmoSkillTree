@@ -1,4 +1,4 @@
-package mmo.skills.mmoSkillTree.Skills;
+package mmo.SkillTree.Skills;
 
 import java.util.ArrayList;
 

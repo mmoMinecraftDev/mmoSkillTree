@@ -1,8 +1,8 @@
-package mmo.skills.mmoSkillTree.Weapons;
+package mmo.SkillTree.Weapons;
 
 import java.util.ArrayList;
 import java.util.List;
-import mmo.skills.mmoSkillTree.Skills.SkillSet;
+import mmo.SkillTree.Skills.SkillSet;
 
 public enum WeaponSet {
 	Axe(SkillSet.Slashing,SkillSet.Tool),

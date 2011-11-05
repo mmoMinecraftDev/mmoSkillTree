@@ -1,5 +1,5 @@
 name: SkillTree
-main: mmo.skills.mmoSkillTree.SkillTree
+main: mmo.SkillTree.MMOSkillTree
 version: 0.2
 author: sadtaco
 depend: [mmoCore]
