@@ -28,8 +28,8 @@ public class SkillsGui {
 	private static MMOPlugin plugin;
 	public static final Logger logger = Logger.getLogger("Minecraft");
 
-	public SkillsGui(MMOPlugin plugin) {
-		SkillsGui.setPlugin(plugin);
+	public SkillsGui() {
+                plugin = MMOSkillTree.plugin;
 	}
 	static GenericPopup skillTreePopup;
 	static Tree curTab;
@@ -40,13 +40,10 @@ public class SkillsGui {
 		GenericLabel label = new GenericLabel("Press \"K\" to open Skills");
 		label.setTextColor(new Color(1.0F, 0.3F, 0.15F, 1.0F));
 		label.setAlign(WidgetAnchor.BOTTOM_RIGHT).setAnchor(WidgetAnchor.BOTTOM_RIGHT);
-		sPlayer.getMainScreen().attachWidget(getPlugin(), label);
+		sPlayer.getMainScreen().attachWidget(plugin, label);
 	}
 
 	public void openSkillTree(Player player) {
-		if (plugin == null) {
-			this.logger.info("plugin is null.");
-		}
 		SpoutPlayer sPlayer = SpoutManager.getPlayer(player);
 
 		GenericPopup popup = new GenericPopup();
@@ -58,7 +55,7 @@ public class SkillsGui {
 		bg.setX(-150).setY(10);
 		bg.setPriority(RenderPriority.Highest);
 		bg.setAnchor(WidgetAnchor.TOP_CENTER);
-		popup.attachWidget(getPlugin(), bg);
+		popup.attachWidget(plugin, bg);
 
 		Container tabs = new GenericContainer();
 		tabs.setLayout(ContainerType.VERTICAL);
@@ -76,7 +73,7 @@ public class SkillsGui {
 		createTab(tabs, SkillSet.Tool);
 		createTab(tabs, SkillSet.Smithing);
 
-		popup.attachWidget(getPlugin(), tabs);
+		popup.attachWidget(plugin, tabs);
 
 		sPlayer.getMainScreen().attachPopupScreen(popup);
 	}
@@ -140,13 +137,5 @@ public class SkillsGui {
 
 		outter.addChild(buttonStack);
 		box.addChild(outter);
-	}
-
-	public static MMOPlugin getPlugin() {
-		return plugin;
-	}
-
-	public static void setPlugin(MMOPlugin plugin) {
-		SkillsGui.plugin = plugin;
 	}
 }

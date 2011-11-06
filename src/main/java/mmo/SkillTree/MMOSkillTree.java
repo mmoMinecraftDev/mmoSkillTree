@@ -24,6 +24,7 @@ import org.getspout.spoutapi.player.SpoutPlayer;
 public class MMOSkillTree extends MMOPlugin {
 
 	public static MMOPlayerManager mmoPlayerManager;
+        public static MMOPlugin plugin;
 
 	@Override
 	public EnumBitSet mmoSupport(EnumBitSet support) {
@@ -34,7 +35,8 @@ public class MMOSkillTree extends MMOPlugin {
 	@Override
 	public void onEnable() {
 		super.onEnable();
-
+                this.plugin = plugin;
+                
 		mmoSkillTreePlayerListener playerListener = new mmoSkillTreePlayerListener();
 		pm.registerEvent(Type.PLAYER_CHAT, playerListener, Priority.Normal, this);
 		pm.registerEvent(Type.PLAYER_JOIN, playerListener, Priority.Normal, this);
@@ -51,7 +53,7 @@ public class MMOSkillTree extends MMOPlugin {
 		private SkillsGui gui;
 
 		public mmoSkillTreePlayerListener() {
-			gui = new SkillsGui(plugin);
+			gui = new SkillsGui();
 		}
 
 		/*public void onPlayerChat(PlayerChatEvent event){
@@ -78,7 +80,7 @@ public class MMOSkillTree extends MMOPlugin {
 		private SkillsGui gui;
 
 		public mmoSkillTreeInputListener() {
-			gui = new SkillsGui(plugin);
+			gui = new SkillsGui();
 		}
 
 		@Override
@@ -102,7 +104,7 @@ public class MMOSkillTree extends MMOPlugin {
 		private SkillsGui gui;
 
 		public mmoSkillTreeScreenListener() {
-			gui = new SkillsGui(plugin);
+			gui = new SkillsGui();
 		}
 
 		@Override
