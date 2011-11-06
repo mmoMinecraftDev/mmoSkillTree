@@ -1,6 +1,7 @@
 package mmo.SkillTree;
 
 import mmo.SkillTree.Skills.SkillSet;
+import org.bukkit.ChatColor;
 
 public class Set {
 
@@ -11,10 +12,12 @@ public class Set {
 	public String string;
 	@SuppressWarnings("unused")
 	private SkillSet skillSet;
+        private MMOPlayer mmoPlayer;
 
-	Set(SkillSet skillSet) {
+	Set(SkillSet skillSet, MMOPlayer mmoPlayer) {
 		this.skillSet = skillSet;
 		this.string = skillSet.toString();
+                this.mmoPlayer = mmoPlayer;
 	}
 
 	public void addXp(int xpAmount) {
@@ -23,6 +26,10 @@ public class Set {
 		if (getCurLvlXp() > getNextLvlXp()) {
 			this.lvl = this.lvl + 1;
 			this.skillPoints = this.skillPoints + 1;
+                        if( !mmoPlayer.hasSpout() ){
+                            mmoPlayer.getPlayer().sendMessage(ChatColor.GOLD + "[Warning] " + ChatColor.WHITE + "You've gained a level, but your client does not allow gui features to assign skills!\n"
+                                    + "Get Spoutcraft at http://spout.in/exe");
+                        }
 		}
 	}
 

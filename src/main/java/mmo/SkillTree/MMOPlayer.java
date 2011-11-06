@@ -7,6 +7,7 @@ import mmo.SkillTree.GUI.MMOXpBar;
 import mmo.SkillTree.Skills.SkillSet;
 
 import org.bukkit.entity.Player;
+import org.getspout.spoutapi.player.SpoutPlayer;
 
 public class MMOPlayer {
 
@@ -14,11 +15,13 @@ public class MMOPlayer {
 	private Player player;
 	private MMOXpBar xpBar;
 	private Map<SkillSet, Set> sets;
+        private boolean hasSpout = false;
 
 	public MMOPlayer(MMOSkillTree plugin, Player player) {
 		this.player = player;
 		xpBar = new MMOXpBar(plugin, player);
 		sets = new HashMap<SkillSet, Set>();
+                hasSpout = ((SpoutPlayer)player).isSpoutCraftEnabled();
 	}
 
 	public Set getSet(SkillSet skillSet) {
@@ -33,7 +36,7 @@ public class MMOPlayer {
 	}
 
 	public void addSet(SkillSet skillSet) {
-		sets.put(skillSet, new Set(skillSet));
+		sets.put(skillSet, new Set(skillSet, this));
 	}
 
 	public Player getPlayer() {
@@ -55,4 +58,8 @@ public class MMOPlayer {
 		float percent = ((float) set.getCurLvlXp() / set.getNextLvlXp());
 		xpBar.draw(percent, skillSet);
 	}
+        
+        public boolean hasSpout(){
+            return hasSpout;
+        }
 }

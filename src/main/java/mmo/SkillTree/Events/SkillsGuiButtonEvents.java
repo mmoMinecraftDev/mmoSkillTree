@@ -20,8 +20,7 @@ public class SkillsGuiButtonEvents extends ScreenListener{
 	@Override
 	public void onButtonClick(ButtonClickEvent event) {
 		TreeTabButton button = (TreeTabButton) event.getButton();
-		SpoutPlayer sPlayer = event.getPlayer(); 
-		sPlayer.sendMessage("Button "+button.getSkillSet().toString()+" clicked");
+		SpoutPlayer sPlayer = event.getPlayer();
 		gui.switchSkillTreeTab(button, sPlayer);
 	}
 	
