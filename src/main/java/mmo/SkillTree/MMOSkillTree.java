@@ -30,9 +30,7 @@ import org.getspout.spoutapi.player.SpoutPlayer;
 public class MMOSkillTree extends MMOPlugin {
 
 	public static MMOPlayerManager mmoPlayerManager;
-        public static MMOPlugin plugin;
-        public static MMOSkillTree skillTreePlugin;
-        public HashMap<String,HashSet<Skill>> listeners;
+	public HashMap<String, HashSet<Skill>> listeners;
 
 	@Override
 	public EnumBitSet mmoSupport(EnumBitSet support) {
@@ -43,24 +41,26 @@ public class MMOSkillTree extends MMOPlugin {
 	@Override
 	public void onEnable() {
 		super.onEnable();
-                this.plugin = plugin;
-                skillTreePlugin = this;
-                listeners = new HashMap<String,HashSet<Skill>>();
-                
+
+		SkillsGui.plugin = this;
+		Skill.plugin = this;
+
+		listeners = new HashMap<String, HashSet<Skill>>();
+
 		mmoSkillTreePlayerListener playerListener = new mmoSkillTreePlayerListener();
 		pm.registerEvent(Type.PLAYER_CHAT, playerListener, Priority.Normal, this);
 		pm.registerEvent(Type.PLAYER_JOIN, playerListener, Priority.Normal, this);
-                
+
 		pm.registerEvent(Type.CUSTOM_EVENT, new mmoSkillTreeInputListener(), Priority.Normal, this);
 		pm.registerEvent(Type.CUSTOM_EVENT, new mmoSkillTreeScreenListener(), Priority.Normal, this);
 		pm.registerEvent(Type.BLOCK_BREAK, new BlockXpListener(this), Priority.Monitor, this);
 		pm.registerEvent(Type.CUSTOM_EVENT, new CombatXpListener(this), Priority.Normal, this);
-                pm.registerEvent(Type.CUSTOM_EVENT, new SkillListener(this), Priority.Normal, this);
-                pm.registerEvent(Type.PLAYER_INTERACT, new SkillPlayerListener(), Priority.Normal, this);
+		pm.registerEvent(Type.CUSTOM_EVENT, new SkillListener(this), Priority.Normal, this);
+		pm.registerEvent(Type.PLAYER_INTERACT, new SkillPlayerListener(), Priority.Normal, this);
 
 		mmoPlayerManager = new MMOPlayerManager(this);
-                
-                new MagicArrowSkill();
+
+		new MagicArrowSkill();
 	}
 
 	public class mmoSkillTreePlayerListener extends PlayerListener {
@@ -126,29 +126,29 @@ public class MMOSkillTree extends MMOPlugin {
 
 		}*/
 	}
-        
-        public void addSkillListener(String eventName, Skill skill) {
-            System.out.println("Adding skill listener for "+eventName+", skill:"+skill);
-            HashSet<Skill> skills = listeners.get(eventName);
-            if( skills == null ){
-                skills = new HashSet<Skill>();
-                listeners.put(eventName, skills);
-            }
-            skills.add(skill);
-        }
 
-        public void removeSkillListener(String eventName, Skill skill) {
-            HashSet<Skill> skills = listeners.get(eventName);
-            if( skills != null ){
-                skills.remove(skill);
-                if( skills.isEmpty() ) {
-                    listeners.remove(eventName);
-                }
-            }
-        }
+	public void addSkillListener(String eventName, Skill skill) {
+		System.out.println("Adding skill listener for " + eventName + ", skill:" + skill);
+		HashSet<Skill> skills = listeners.get(eventName);
+		if (skills == null) {
+			skills = new HashSet<Skill>();
+			listeners.put(eventName, skills);
+		}
+		skills.add(skill);
+	}
 
-        public HashSet getListenerSet(String eventName){
-            System.out.println("getListenerSet string:"+eventName);
-            return listeners.get(eventName);
-        }
+	public void removeSkillListener(String eventName, Skill skill) {
+		HashSet<Skill> skills = listeners.get(eventName);
+		if (skills != null) {
+			skills.remove(skill);
+			if (skills.isEmpty()) {
+				listeners.remove(eventName);
+			}
+		}
+	}
+
+	public HashSet getListenerSet(String eventName) {
+		System.out.println("getListenerSet string:" + eventName);
+		return listeners.get(eventName);
+	}
 }

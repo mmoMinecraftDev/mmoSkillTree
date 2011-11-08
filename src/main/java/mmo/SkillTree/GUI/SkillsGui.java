@@ -25,13 +25,10 @@ import org.getspout.spoutapi.gui.WidgetAnchor;
 
 public class SkillsGui {
 
-	private static MMOPlugin plugin;
-        private static MMOSkillTree skillTreePlugin;
+	public static MMOPlugin plugin;
 	public static final Logger logger = Logger.getLogger("Minecraft");
 
 	public SkillsGui() {
-                plugin = MMOSkillTree.plugin;
-                skillTreePlugin = MMOSkillTree.skillTreePlugin;
 	}
 	static GenericPopup skillTreePopup;
 	static Tree curTab;
@@ -43,8 +40,8 @@ public class SkillsGui {
 		label.setTextColor(new Color(1.0F, 0.3F, 0.15F, 1.0F));
 		label.setAlign(WidgetAnchor.BOTTOM_RIGHT).setAnchor(WidgetAnchor.BOTTOM_RIGHT);
 		sPlayer.getMainScreen().attachWidget(plugin, label);
-                
-                new SkillBar(skillTreePlugin, player);
+
+		new SkillBar(plugin, player);
 	}
 
 	public void openSkillTree(Player player) {
