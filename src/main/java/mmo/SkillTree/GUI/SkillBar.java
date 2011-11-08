@@ -1,5 +1,6 @@
 package mmo.SkillTree.GUI;
 
+import java.lang.reflect.Array;
 import mmo.Core.MMOPlugin;
 import mmo.SkillTree.MMOSkillTree;
 import mmo.SkillTree.Skills.SkillSet;
@@ -11,6 +12,7 @@ import org.getspout.spoutapi.gui.GenericContainer;
 import org.getspout.spoutapi.gui.GenericRectange;
 import org.getspout.spoutapi.gui.GenericTexture;
 import org.getspout.spoutapi.gui.RenderPriority;
+import org.getspout.spoutapi.gui.Widget;
 import org.getspout.spoutapi.gui.WidgetAnchor;
 import org.getspout.spoutapi.player.SpoutPlayer;
 
@@ -18,41 +20,39 @@ public class SkillBar {
 
 	@SuppressWarnings("unused")
 	private Player player;
-	private MMOSkillTree plugin;
-	private GenericContainer xpBox;
-	private GenericRectange xpBar;
+	private MMOPlugin plugin;
+	private GenericContainer skillBar;
+        private GenericRectange GenericRectange[] = new GenericRectange[10];
 
-	public SkillBar(MMOSkillTree plugin, Player player) {
+	public SkillBar(MMOPlugin plugin, Player player) {
 		this.plugin = plugin;
 		this.player = player;
 		SpoutPlayer sPlayer = (SpoutPlayer) player;
 
-		xpBox = (GenericContainer) new GenericContainer(
-				new GenericTexture("_skillBar.png")
-					.setHeight(184)
-					.setWidth(23)
-					.setMargin(1, 0, 1, 1)
-					.setPriority(RenderPriority.Highest)
-				)
-				.setAnchor(WidgetAnchor.TOP_CENTER)
-				.setLayout(ContainerType.OVERLAY)
-				.setWidth(182)
-				.setHeight(8)
-				.setX(-91)
-				.setY(20);
-		sPlayer.getMainScreen().attachWidget(this.plugin, xpBox);
+		skillBar = (GenericContainer) new GenericContainer()
+				.setAnchor(WidgetAnchor.CENTER_RIGHT)
+				.setLayout(ContainerType.VERTICAL)
+                                .setPriority(RenderPriority.High)
+				.setWidth(20)
+				.setHeight(180)
+                                .setX(-20)
+                                .setY(-90);
+		sPlayer.getMainScreen().attachWidget(plugin, skillBar);
+                GenericRectange bg = new GenericRectange(new Color(0.5F, 0.5F, 0.5F));
+				bg.setHeight(182)
+				.setWidth(22)
+                                .setX(-22)
+                                .setY(-91)
+                                .setAnchor( WidgetAnchor.CENTER_RIGHT )
+				.setPriority(RenderPriority.Highest);
+                sPlayer.getMainScreen().attachWidget(plugin, bg);
+                
+                GenericRectange[0] = new GenericRectange(new Color(1.0F, 0.5F, 0.5F));
+                GenericRectange[0].setHeight(16)
+                                    .setWidth(16)
+                                    .setMargin(1)
+                                    .setFixed(true);
+                skillBar.addChild( GenericRectange[0] );
 	}
 
-    SkillBar( MMOPlugin plugin, Player player ){
-        throw new UnsupportedOperationException( "Not yet implemented" );
-    }
-
-	public void draw(float percent, SkillSet skillSet) {
-		if (xpBar == null) {
-			xpBar = new GenericRectange(new Color(0.35F, 0.75F, 0.3F));
-			xpBar.setHeight(3).setMargin(2, 1, 3, 1).setFixed(true);
-			xpBar.setPriority(RenderPriority.Normal);
-			xpBox.addChild(xpBar);
-		}
-	}
 }

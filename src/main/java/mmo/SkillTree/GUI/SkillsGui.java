@@ -3,7 +3,6 @@ package mmo.SkillTree.GUI;
 import java.util.logging.Logger;
 
 import mmo.Core.MMOPlugin;
-import mmo.SkillTree.MMOSkillTree;
 import mmo.SkillTree.Skills.SkillSet;
 import mmo.SkillTree.Skills.Tree;
 

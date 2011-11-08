@@ -45,7 +45,7 @@ public class MMOXpBar {
 				.setHeight(8)
 				.setX(-91)
 				.setY(20);
-		sPlayer.getMainScreen().attachWidget(this.plugin, xpBox);
+		sPlayer.getMainScreen().attachWidget(plugin, xpBox);
 	}
 
 	public void draw(float percent, SkillSet skillSet) {
