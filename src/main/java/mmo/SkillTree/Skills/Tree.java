@@ -28,7 +28,7 @@ public class Tree {
 	static final int numRows = 5;
 	static final int numCols = 4;
 	public MMOPlugin plugin;
-	public Skill[][] skills = new Skill[numRows][numCols];
+	public TreeSkill[][] skills = new TreeSkill[numRows][numCols];
 	public SkillSlot[][] skillSlots = new SkillSlot[numRows][numCols];
 
 	public Tree(MMOPlugin plugin, GenericPopup popup, SpoutPlayer sPlayer, SkillSet skillSet) {
@@ -69,9 +69,9 @@ public class Tree {
 
 		swordSkills = new Sword();
 
-		for (Entry<String, Skill> entry : swordSkills.map.entrySet()) {
+		for (Entry<String, TreeSkill> entry : swordSkills.map.entrySet()) {
 			//String key = entry.getKey();
-			Skill skill = entry.getValue();
+			TreeSkill skill = entry.getValue();
 			int row = skill.getRow();
 			int col = skill.getCol();
 			skills[row][col] = skill;
@@ -82,9 +82,9 @@ public class Tree {
 			rowBox.setWidth(300).setHeight(38);
 			for (int col = 0; col < numCols; col++) {
 				if (skills[row][col] == null) {
-					skills[row][col] = new Skill();
+					skills[row][col] = new TreeSkill();
 				}
-				Skill skill = skills[row][col];
+				TreeSkill skill = skills[row][col];
 				skillSlots[row][col] = new SkillSlot(rowBox).setName(skill.getName()).setType(skill.getType());
 			}
 			box.addChild(rowBox);
@@ -92,10 +92,10 @@ public class Tree {
 		for (int row = 0; row < numRows; row++) {
 			for (int col = 0; col < numCols; col++) {
 				SkillSlot skillSlot = skillSlots[row][col];
-				Skill skill = skills[row][col];
+				TreeSkill skill = skills[row][col];
 				String[] children = skill.getChildren();
 				for (int i = 0; i < children.length; i++) {
-					Skill childSkill = swordSkills.getSkill(children[i]);
+					TreeSkill childSkill = swordSkills.getSkill(children[i]);
 					//System.out.println(skill.getName() + " has child " + childSkill.getName());
 					int childRow = childSkill.getRow();
 					int childCol = childSkill.getCol();

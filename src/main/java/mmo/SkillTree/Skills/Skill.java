@@ -1,59 +1,31 @@
 package mmo.SkillTree.Skills;
 
-import java.util.ArrayList;
+import mmo.SkillTree.Events.AttackEvent;
+import mmo.SkillTree.Events.SkillUseEvent;
+import mmo.SkillTree.MMOSkillTree;
 
-public class Skill {
-	
-	public String name;
-	public int row;
-	public int col;
-	public SkillType type;
-	public ArrayList<String> parents = new ArrayList<String>();
-	public ArrayList<String> children = new ArrayList<String>();
-	
-	public Skill(){
-		
-	}
-	public Skill setName(String newName){
-		name = newName;
-		return this;
-	}
-	public String getName(){
-		return name;
-	}
-	public Skill setRow(int newRow){
-		row = newRow;
-		return this;
-	}
-	public int getRow(){
-		return row;
-	}
-	public Skill setCol(int newCol){
-		col = newCol;
-		return this;
-	}
-	public int getCol(){
-		return col;
-	}
-	public Skill addParent(String newParent){
-		parents.add(newParent);
-		return this;
-	}
-	public String[] getParents(){
-		return (String[]) parents.toArray();
-	}
-	public Skill addChild(String newChild){
-		children.add(newChild);
-		return this;
-	}
-	public String[] getChildren(){
-		return children.toArray(new String[children.size()]);
-	}
-	public Skill setType(SkillType newType){
-		type = newType;
-		return this;
-	}
-	public SkillType getType(){
-		return type;
-	}
+public class Skill{
+    MMOSkillTree skillTreePlugin;
+    private String name;
+    private String desc;
+    private int lvl = 0;
+    private int healthCost = 0;
+    private int hungerCost = 0;
+    private int manaCost = 0;
+    private int cooldown = 0;
+    
+    public Skill(){
+        skillTreePlugin = MMOSkillTree.skillTreePlugin;
+        addListener("SKILL_USE");
+    }
+    
+    public void onAttack(AttackEvent event){}
+    public void onSkillUse(SkillUseEvent event){}
+    
+    public void addListener(String eventName){
+        skillTreePlugin.addSkillListener(eventName, this);
+    }
+    public void removeListener(String eventName){
+        skillTreePlugin.removeSkillListener(eventName, this);
+    }
 }

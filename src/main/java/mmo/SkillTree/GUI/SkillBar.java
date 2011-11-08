@@ -1,5 +1,6 @@
 package mmo.SkillTree.GUI;
 
+import mmo.Core.MMOPlugin;
 import mmo.SkillTree.MMOSkillTree;
 import mmo.SkillTree.Skills.SkillSet;
 
@@ -13,31 +14,25 @@ import org.getspout.spoutapi.gui.RenderPriority;
 import org.getspout.spoutapi.gui.WidgetAnchor;
 import org.getspout.spoutapi.player.SpoutPlayer;
 
-public class MMOXpBar {
+public class SkillBar {
 
 	@SuppressWarnings("unused")
 	private Player player;
 	private MMOSkillTree plugin;
 	private GenericContainer xpBox;
 	private GenericRectange xpBar;
-	private GenericTexture xpIcon;
 
-	public MMOXpBar(MMOSkillTree plugin, Player player) {
+	public SkillBar(MMOSkillTree plugin, Player player) {
 		this.plugin = plugin;
 		this.player = player;
 		SpoutPlayer sPlayer = (SpoutPlayer) player;
 
 		xpBox = (GenericContainer) new GenericContainer(
-				new GenericTexture("_xpBarBg.png")
-					.setHeight(5)
-					.setWidth(182)
-					.setMargin(1, 1, 2, 1)
-					.setPriority(RenderPriority.Highest),
-				new GenericTexture("_xpBar.png")
-					.setHeight(5)
-					.setWidth(182)
-					.setMargin(1, 1, 2, 1)
-					.setPriority(RenderPriority.Low)
+				new GenericTexture("_skillBar.png")
+					.setHeight(184)
+					.setWidth(23)
+					.setMargin(1, 0, 1, 1)
+					.setPriority(RenderPriority.Highest)
 				)
 				.setAnchor(WidgetAnchor.TOP_CENTER)
 				.setLayout(ContainerType.OVERLAY)
@@ -48,24 +43,16 @@ public class MMOXpBar {
 		sPlayer.getMainScreen().attachWidget(this.plugin, xpBox);
 	}
 
+    SkillBar( MMOPlugin plugin, Player player ){
+        throw new UnsupportedOperationException( "Not yet implemented" );
+    }
+
 	public void draw(float percent, SkillSet skillSet) {
 		if (xpBar == null) {
 			xpBar = new GenericRectange(new Color(0.35F, 0.75F, 0.3F));
 			xpBar.setHeight(3).setMargin(2, 1, 3, 1).setFixed(true);
 			xpBar.setPriority(RenderPriority.Normal);
 			xpBox.addChild(xpBar);
-		}
-		percent = (float) (percent * 100 * 1.8);// the 1.8 will get it to fit to the 180px wide bar. Simple.
-		xpBar.setWidth((int) percent).setDirty(true);
-		if (xpIcon == null) {
-			xpIcon = new GenericTexture(skillSet.toString() + ".png");
-			xpIcon.setWidth(8).setHeight(8).setFixed(true);
-			xpIcon.setPriority(RenderPriority.Lowest);
-			xpBox.addChild(xpIcon);
-		} else {
-			if( !xpIcon.getUrl().equals(skillSet.toString() + ".png") ){
-				xpIcon.setUrl(skillSet.toString() + ".png").setDirty(true);
-			}
 		}
 	}
 }

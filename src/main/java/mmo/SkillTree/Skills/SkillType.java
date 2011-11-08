@@ -3,8 +3,7 @@ package mmo.SkillTree.Skills;
 import java.util.ArrayList;
 import java.util.List;
 
-public enum SkillType
-{
+public enum SkillType{
 	BLANK,
 	ACTIVE,
 	PASSIVE;

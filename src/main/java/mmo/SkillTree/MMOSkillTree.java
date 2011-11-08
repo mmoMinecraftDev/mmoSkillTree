@@ -1,11 +1,17 @@
 package mmo.SkillTree;
 
+import java.util.HashMap;
+import java.util.HashSet;
 import mmo.Core.MMOPlugin;
 import mmo.Core.util.EnumBitSet;
 import mmo.SkillTree.Events.BlockXpListener;
 import mmo.SkillTree.Events.CombatXpListener;
+import mmo.SkillTree.Events.SkillListener;
+import mmo.SkillTree.Events.SkillPlayerListener;
 import mmo.SkillTree.GUI.SkillsGui;
 import mmo.SkillTree.GUI.TreeTabButton;
+import mmo.SkillTree.Skills.FinalSkills.MagicArrowSkill;
+import mmo.SkillTree.Skills.Skill;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event.Priority;
@@ -25,6 +31,8 @@ public class MMOSkillTree extends MMOPlugin {
 
 	public static MMOPlayerManager mmoPlayerManager;
         public static MMOPlugin plugin;
+        public static MMOSkillTree skillTreePlugin;
+        public HashMap<String,HashSet<Skill>> listeners;
 
 	@Override
 	public EnumBitSet mmoSupport(EnumBitSet support) {
@@ -36,16 +44,23 @@ public class MMOSkillTree extends MMOPlugin {
 	public void onEnable() {
 		super.onEnable();
                 this.plugin = plugin;
+                skillTreePlugin = this;
+                listeners = new HashMap<String,HashSet<Skill>>();
                 
 		mmoSkillTreePlayerListener playerListener = new mmoSkillTreePlayerListener();
 		pm.registerEvent(Type.PLAYER_CHAT, playerListener, Priority.Normal, this);
 		pm.registerEvent(Type.PLAYER_JOIN, playerListener, Priority.Normal, this);
+                
 		pm.registerEvent(Type.CUSTOM_EVENT, new mmoSkillTreeInputListener(), Priority.Normal, this);
 		pm.registerEvent(Type.CUSTOM_EVENT, new mmoSkillTreeScreenListener(), Priority.Normal, this);
 		pm.registerEvent(Type.BLOCK_BREAK, new BlockXpListener(this), Priority.Monitor, this);
 		pm.registerEvent(Type.CUSTOM_EVENT, new CombatXpListener(this), Priority.Normal, this);
+                pm.registerEvent(Type.CUSTOM_EVENT, new SkillListener(this), Priority.Normal, this);
+                pm.registerEvent(Type.PLAYER_INTERACT, new SkillPlayerListener(), Priority.Normal, this);
 
 		mmoPlayerManager = new MMOPlayerManager(this);
+                
+                new MagicArrowSkill();
 	}
 
 	public class mmoSkillTreePlayerListener extends PlayerListener {
@@ -55,14 +70,6 @@ public class MMOSkillTree extends MMOPlugin {
 		public mmoSkillTreePlayerListener() {
 			gui = new SkillsGui();
 		}
-
-		/*public void onPlayerChat(PlayerChatEvent event){
-			Player p = event.getPlayer();
-			String msg = event.getMessage().toLowerCase();
-			if( msg.contains("hi") && msg.contains("server") ){
-				p.sendMessage(ChatColor.RED + "[Server] " + ChatColor.WHITE + "Hi!");
-			}
-		}*/
 
 		@Override
 		public void onPlayerJoin(PlayerJoinEvent event) {
@@ -119,5 +126,29 @@ public class MMOSkillTree extends MMOPlugin {
 
 		}*/
 	}
+        
+        public void addSkillListener(String eventName, Skill skill) {
+            System.out.println("Adding skill listener for "+eventName+", skill:"+skill);
+            HashSet<Skill> skills = listeners.get(eventName);
+            if( skills == null ){
+                skills = new HashSet<Skill>();
+                listeners.put(eventName, skills);
+            }
+            skills.add(skill);
+        }
 
+        public void removeSkillListener(String eventName, Skill skill) {
+            HashSet<Skill> skills = listeners.get(eventName);
+            if( skills != null ){
+                skills.remove(skill);
+                if( skills.isEmpty() ) {
+                    listeners.remove(eventName);
+                }
+            }
+        }
+
+        public HashSet getListenerSet(String eventName){
+            System.out.println("getListenerSet string:"+eventName);
+            return listeners.get(eventName);
+        }
 }
