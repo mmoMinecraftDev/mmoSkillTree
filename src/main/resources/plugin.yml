@@ -1,4 +1,4 @@
-name: SkillTree
+name: mmoSkillTree
 main: mmo.SkillTree.MMOSkillTree
 version: 0.2
 author: sadtaco
