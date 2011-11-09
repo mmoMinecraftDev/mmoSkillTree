@@ -1,6 +1,6 @@
 package mmo.SkillTree;
 
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.Map;
 
 import mmo.SkillTree.GUI.MMOXpBar;
@@ -21,10 +21,11 @@ public class MMOPlayer{
 	private boolean hasSpout = false;
 
 	public MMOPlayer( MMOSkillTree plugin, Player player ){
+		System.out.println("MMOPlayer constructor");
 		this.player = player;
 		xpBar = new MMOXpBar( plugin, player );
 		skillBar = new SkillBar( plugin, player );
-		sets = new HashMap<SkillSet, Set>();
+		sets = new EnumMap<SkillSet, Set>(SkillSet.class);
 		hasSpout = ( (SpoutPlayer) player ).isSpoutCraftEnabled();
 	}
 

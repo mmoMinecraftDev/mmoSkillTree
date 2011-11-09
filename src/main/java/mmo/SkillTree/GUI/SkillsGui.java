@@ -1,8 +1,5 @@
 package mmo.SkillTree.GUI;
 
-import java.util.logging.Logger;
-
-import mmo.Core.MMOPlugin;
 import mmo.SkillTree.MMOPlayer;
 import mmo.SkillTree.MMOSkillTree;
 import mmo.SkillTree.Skills.FinalSkills.MagicArrowSkill;
@@ -27,7 +24,7 @@ import org.getspout.spoutapi.gui.WidgetAnchor;
 
 public class SkillsGui{
 
-	public static MMOPlugin plugin;
+	public static MMOSkillTree plugin;
 
 	public SkillsGui(){
 	}

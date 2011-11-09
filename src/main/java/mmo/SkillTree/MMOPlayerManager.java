@@ -16,6 +16,7 @@ public class MMOPlayerManager {
 	}
 
 	public MMOPlayer get(Player player) {
+		System.out.println("getting "+player.getName());
 		String name = player.getName().toLowerCase();
 		MMOPlayer mmoPlayer = mmoPlayers.get(name);
 		if (mmoPlayer != null) {

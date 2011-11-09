@@ -1,8 +1,8 @@
 package mmo.SkillTree.GUI;
 
-import mmo.Core.MMOPlugin;
-
+import mmo.SkillTree.MMOSkillTree;
 import mmo.SkillTree.Skills.Skill;
+
 import org.bukkit.entity.Player;
 import org.getspout.spoutapi.gui.ContainerType;
 import org.getspout.spoutapi.gui.GenericContainer;
@@ -13,13 +13,12 @@ import org.getspout.spoutapi.player.SpoutPlayer;
 
 public class SkillBar{
 
-	@SuppressWarnings("unused")
 	private Player player;
-	private MMOPlugin plugin;
+	private MMOSkillTree plugin;
 	private GenericContainer skillBar;
 	private GenericTexture skillIcons[] = new GenericTexture[9];
 
-	public SkillBar( MMOPlugin plugin, Player player ){
+	public SkillBar( MMOSkillTree plugin, Player player ){
 		this.plugin = plugin;
 		this.player = player;
 		SpoutPlayer sPlayer = (SpoutPlayer) player;

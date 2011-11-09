@@ -1,6 +1,5 @@
 package mmo.SkillTree.Events;
 
-import mmo.Core.MMOPlugin;
 import mmo.SkillTree.GUI.SkillsGui;
 import mmo.SkillTree.GUI.TreeTabButton;
 

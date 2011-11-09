@@ -2,7 +2,6 @@ package mmo.SkillTree.Skills;
 
 import java.util.Map.Entry;
 
-import mmo.Core.MMOPlugin;
 import mmo.SkillTree.MMOPlayer;
 import mmo.SkillTree.Set;
 import mmo.SkillTree.MMOSkillTree;
@@ -27,11 +26,11 @@ public class Tree {
 	public Sword swordSkills;
 	static final int numRows = 5;
 	static final int numCols = 4;
-	public MMOPlugin plugin;
+	public MMOSkillTree plugin;
 	public TreeSkill[][] skills = new TreeSkill[numRows][numCols];
 	public SkillSlot[][] skillSlots = new SkillSlot[numRows][numCols];
 
-	public Tree(MMOPlugin plugin, GenericPopup popup, SpoutPlayer sPlayer, SkillSet skillSet) {
+	public Tree(MMOSkillTree plugin, GenericPopup popup, SpoutPlayer sPlayer, SkillSet skillSet) {
 		this.plugin = plugin;
 		skillTreePopup = popup;
 		Player p = (Player) sPlayer;

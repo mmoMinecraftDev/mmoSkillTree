@@ -15,7 +15,6 @@ import org.getspout.spoutapi.player.SpoutPlayer;
 
 public class MMOXpBar {
 
-	@SuppressWarnings("unused")
 	private Player player;
 	private MMOSkillTree plugin;
 	private GenericContainer xpBox;
