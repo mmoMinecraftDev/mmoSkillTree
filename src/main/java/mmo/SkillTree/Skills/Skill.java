@@ -4,7 +4,7 @@ import mmo.SkillTree.Events.AttackEvent;
 import mmo.SkillTree.Events.SkillUseEvent;
 import mmo.SkillTree.MMOSkillTree;
 
-public class Skill {
+public class Skill{
 
 	static public MMOSkillTree plugin;
 	private String name;
@@ -15,21 +15,21 @@ public class Skill {
 	private int manaCost = 0;
 	private int cooldown = 0;
 
-	public Skill() {
-		addListener("SKILL_USE");
+	public Skill(){
+		addListener( "SKILL_USE" );
 	}
 
-	public void onAttack(AttackEvent event) {
+	public void onAttack( AttackEvent event ){
 	}
 
-	public void onSkillUse(SkillUseEvent event) {
+	public void onSkillUse( SkillUseEvent event ){
 	}
 
-	public void addListener(String eventName) {
-		plugin.addSkillListener(eventName, this);
+	public void addListener( String eventName ){
+		plugin.addSkillListener( eventName, this );
 	}
 
-	public void removeListener(String eventName) {
-		plugin.removeSkillListener(eventName, this);
+	public void removeListener( String eventName ){
+		plugin.removeSkillListener( eventName, this );
 	}
 }

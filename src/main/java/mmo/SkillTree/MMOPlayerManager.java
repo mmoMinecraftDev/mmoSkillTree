@@ -26,7 +26,7 @@ public class MMOPlayerManager {
 			}
 		}
 		//null, so make it.
-		//mmoPlayer = Load From Storage.
+		//Need to load from storage here instead, as well.
 		add(player);
 		mmoPlayer = mmoPlayers.get(name);
 		return mmoPlayer;

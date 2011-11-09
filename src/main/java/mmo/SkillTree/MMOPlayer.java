@@ -4,62 +4,70 @@ import java.util.HashMap;
 import java.util.Map;
 
 import mmo.SkillTree.GUI.MMOXpBar;
+import mmo.SkillTree.GUI.SkillBar;
+import mmo.SkillTree.Skills.Skill;
 import mmo.SkillTree.Skills.SkillSet;
 
 import org.bukkit.entity.Player;
 import org.getspout.spoutapi.player.SpoutPlayer;
 
-public class MMOPlayer {
+public class MMOPlayer{
 
 	private int mana = 0;
 	private Player player;
 	private MMOXpBar xpBar;
+	private SkillBar skillBar;
 	private Map<SkillSet, Set> sets;
-        private boolean hasSpout = false;
+	private boolean hasSpout = false;
 
-	public MMOPlayer(MMOSkillTree plugin, Player player) {
+	public MMOPlayer( MMOSkillTree plugin, Player player ){
 		this.player = player;
-		xpBar = new MMOXpBar(plugin, player);
+		xpBar = new MMOXpBar( plugin, player );
+		skillBar = new SkillBar( plugin, player );
 		sets = new HashMap<SkillSet, Set>();
-                hasSpout = ((SpoutPlayer)player).isSpoutCraftEnabled();
+		hasSpout = ( (SpoutPlayer) player ).isSpoutCraftEnabled();
 	}
 
-	public Set getSet(SkillSet skillSet) {
-		Set set = sets.get(skillSet);
-		if (set != null) {
+	public Set getSet( SkillSet skillSet ){
+		Set set = sets.get( skillSet );
+		if( set != null ){
 			return set;
 		}
 		// If it gets to this stage then it's null, so create it.
-		addSet(skillSet);
-		set = sets.get(skillSet);
+		addSet( skillSet );
+		set = sets.get( skillSet );
 		return set;
 	}
 
-	public void addSet(SkillSet skillSet) {
-		sets.put(skillSet, new Set(skillSet, this));
+	public void addSet( SkillSet skillSet ){
+		sets.put( skillSet, new Set( skillSet, this ) );
 	}
 
-	public Player getPlayer() {
+	public Player getPlayer(){
 		return this.player;
 	}
 
-	public int getMana() {
+	public int getMana(){
 		return mana;
 	}
 
-	public void increaseMana(int mana) {
+	public void increaseMana( int mana ){
 		this.mana = this.mana + mana;
 	}
 
-	public void addXp(int xpAmount, SkillSet skillSet) {
-		Set set = getSet(skillSet);
-		set.addXp(xpAmount);
+	public void addXp( int xpAmount, SkillSet skillSet ){
+		Set set = getSet( skillSet );
+		set.addXp( xpAmount );
 
-		float percent = ((float) set.getCurLvlXp() / set.getNextLvlXp());
-		xpBar.draw(percent, skillSet);
+		float percent = ( (float) set.getCurLvlXp() / set.getNextLvlXp() );
+		xpBar.draw( percent, skillSet );
 	}
-        
-        public boolean hasSpout(){
-            return hasSpout;
-        }
+	
+	public void setSkill( int pos, Skill skill ){
+		skillBar.setSkill(pos, skill);
+	}
+
+	public boolean hasSpout(){
+		return hasSpout;
+	}
 }
