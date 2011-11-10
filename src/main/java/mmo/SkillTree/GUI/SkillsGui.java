@@ -32,7 +32,7 @@ public class SkillsGui{
 	static GenericPopup skillTreePopup;
 	static Tree curTab;
 
-	public void skillHint( Player p ){
+	public void onJoin( Player p ){
 		SpoutPlayer sPlayer = SpoutManager.getPlayer( p );
 
 		GenericLabel label = new GenericLabel( "Press \"K\" to open Skills" );
@@ -41,7 +41,7 @@ public class SkillsGui{
 		sPlayer.getMainScreen().attachWidget( plugin, label );
 		
 		SkillsPlayer mmoPlayer = MMOSkillTree.mmoPlayerManager.get(p);
-		Skill magicArrow = new MagicArrowSkill();
+		Skill magicArrow = new MagicArrowSkill( p );
 		mmoPlayer.addSkill( magicArrow );
 		mmoPlayer.setSkill( 0, magicArrow );
 	}

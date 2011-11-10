@@ -74,10 +74,9 @@ public class MMOSkillTree extends MMOPlugin{
 		@Override
 		public void onPlayerJoin( PlayerJoinEvent event ){
 			Player p = event.getPlayer();
-			gui.skillHint( p );
+			gui.onJoin( p );
 			p.sendMessage( ChatColor.RED + "[rph] " + ChatColor.WHITE + "The RPG mod I'm making doesn't do anything yet, "
 				+ "but you can see the progress."
-				+ " I also removed mcmmo because it's pretty boring. I added Heroes and some other things."
 				+ "\nDonate if you can too, please. <3" );
 		}
 	}
@@ -116,15 +115,26 @@ public class MMOSkillTree extends MMOPlugin{
 		@Override
 		public void onKeyPressedEvent( KeyPressedEvent event){
 			Keyboard key = event.getKey();
-			if( key == Keyboard.KEY_1 ){
-				SpoutPlayer p = event.getPlayer();
-				if( holdingCtrl.contains( p ) ){
-					p.sendMessage("ctrl+1 pressed");
-					p.setItemInHand( lastWep.get( p ) );
-					p.updateInventory();
-					SkillsPlayer mmoPlayer = MMOSkillTree.mmoPlayerManager.get(p);
-					mmoPlayer.activateSkill(0);
-				}
+			switch(key){
+				case KEY_1:
+				case KEY_2:
+				case KEY_3:
+				case KEY_4:
+				case KEY_5:
+				case KEY_6:
+				case KEY_7:
+				case KEY_8:
+				case KEY_9:
+					SpoutPlayer p = event.getPlayer();
+					if( holdingCtrl.contains( p ) ){
+						int numKey = (int)key.toString().charAt(4) - 49;
+						p.sendMessage(numKey+" pressed");
+						//p.setItemInHand( lastWep.get( p ) ); // This is wrong. This puts the pressed keys item in the current hand. It doesn't change the #slot that's active..
+						SkillsPlayer mmoPlayer = MMOSkillTree.mmoPlayerManager.get(p);
+						mmoPlayer.activateSkill(numKey);
+
+					}
+				break;
 			}
 			if( key == Keyboard.KEY_LCONTROL ){
 				SpoutPlayer p = event.getPlayer();

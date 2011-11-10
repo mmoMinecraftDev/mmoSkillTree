@@ -1,13 +1,15 @@
 package mmo.SkillTree.Skills;
 
 import mmo.SkillTree.Events.SkillUseEvent;
+import org.bukkit.entity.Player;
 
 public class OnAttackSkill extends Skill{
 
-	int uses = 3;
-	int usesLeft = 0;
+	protected int uses = 3;
+	protected int usesLeft = 0;
 	
-	public OnAttackSkill(){
+	public OnAttackSkill( Player player ){
+		super(player);
 	}
 	
 	@Override

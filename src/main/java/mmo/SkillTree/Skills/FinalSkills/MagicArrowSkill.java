@@ -12,14 +12,15 @@ import org.bukkit.inventory.PlayerInventory;
 
 public class MagicArrowSkill extends OnAttackSkill{
 
-	public MagicArrowSkill(){
+	public MagicArrowSkill( Player player ){
+		super(player);
 	}
 
 	@Override
 	public void onAttack( AttackEvent event ){
 		WeaponSet weaponSet = event.getWeapon();
-		if( weaponSet.equals( WeaponSet.Bow ) ){
-			Player p = event.getPlayer();
+		Player p = event.getPlayer();
+		if( weaponSet.equals( WeaponSet.Bow ) && p.equals(this.player) ){
 			PlayerInventory inventory = p.getInventory();
 			ItemStack[] allItems = inventory.getContents();
 			boolean foundStack = false;
@@ -35,8 +36,7 @@ public class MagicArrowSkill extends OnAttackSkill{
 				inventory.setItem( inventory.firstEmpty(), new ItemStack( Material.ARROW ) );
 			}
 
-			SkillUseEvent skillUseEvent = new SkillUseEvent( p );
-			Bukkit.getServer().getPluginManager().callEvent( skillUseEvent );
+			skillUseEvent();
 		}
 	}
 }

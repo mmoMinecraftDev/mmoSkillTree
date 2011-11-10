@@ -35,7 +35,7 @@ public class SkillBar{
 		for( int i = 0; i < 9; i++ ){
 			skillIcons[i] = new GenericTexture("");
 			skillIcons[i].setHeight( 16 ).setWidth( 16 ).setMargin( 2, 1 ).setFixed( true );
-			skills[i] = new Skill();
+			skills[i] = new Skill(player);
 		}
 		skillBar.addChildren( skillIcons );
 	}

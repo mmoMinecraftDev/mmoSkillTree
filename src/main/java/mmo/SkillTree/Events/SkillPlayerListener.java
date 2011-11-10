@@ -49,7 +49,7 @@ public class SkillPlayerListener extends PlayerListener{
 		} else if( id == 261 ){
 			return WeaponSet.Bow;
 		} else {
-			return WeaponSet.Unarmed; //This is actually going to make anything but the weapons count as tools, pretty much.  So you can hit with blocks to gain tool or unarmed combat xp
+			return WeaponSet.Unarmed; //This is actually going to make anything but the weapons count as tools, pretty much. So you can hit with blocks to gain tool or unarmed combat xp
 		}
 	}
 }
