@@ -1,5 +1,6 @@
 package mmo.SkillTree;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import mmo.Core.MMOPlugin;
@@ -10,7 +11,6 @@ import mmo.SkillTree.Events.SkillListener;
 import mmo.SkillTree.Events.SkillPlayerListener;
 import mmo.SkillTree.GUI.SkillsGui;
 import mmo.SkillTree.GUI.TreeTabButton;
-import mmo.SkillTree.Skills.FinalSkills.MagicArrowSkill;
 import mmo.SkillTree.Skills.Skill;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -18,7 +18,9 @@ import org.bukkit.event.Event.Priority;
 import org.bukkit.event.Event.Type;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerListener;
+import org.bukkit.inventory.ItemStack;
 import org.getspout.spoutapi.event.input.InputListener;
+import org.getspout.spoutapi.event.input.KeyPressedEvent;
 import org.getspout.spoutapi.event.input.KeyReleasedEvent;
 import org.getspout.spoutapi.event.screen.ButtonClickEvent;
 import org.getspout.spoutapi.event.screen.ScreenListener;
@@ -31,7 +33,7 @@ public class MMOSkillTree extends MMOPlugin{
 
 	public static MMOPlayerManager mmoPlayerManager;
 	public HashMap<String, HashSet<Skill>> listeners;
-
+	
 	@Override
 	public EnumBitSet mmoSupport( EnumBitSet support ){
 		support.set( Support.MMO_AUTO_EXTRACT );
@@ -59,8 +61,6 @@ public class MMOSkillTree extends MMOPlugin{
 		pm.registerEvent( Type.PLAYER_INTERACT, new SkillPlayerListener(), Priority.Normal, this );
 
 		mmoPlayerManager = new MMOPlayerManager( this );
-
-		new MagicArrowSkill();
 	}
 
 	public class mmoSkillTreePlayerListener extends PlayerListener{
@@ -85,14 +85,17 @@ public class MMOSkillTree extends MMOPlugin{
 	public class mmoSkillTreeInputListener extends InputListener{
 
 		private SkillsGui gui;
-
+		private ArrayList holdingCtrl = new ArrayList(); //checks if someone is holding ctrl when they press another key.
+		HashMap<SpoutPlayer, ItemStack> lastWep = new HashMap<SpoutPlayer, ItemStack>(); //Stores the weapon they were hitting when holding ctrl, to be reverted back when they hit a num key for the obvious reason.
+		
 		public mmoSkillTreeInputListener(){
 			gui = new SkillsGui();
 		}
 
 		@Override
 		public void onKeyReleasedEvent( KeyReleasedEvent event ){
-			if( event.getKey() == Keyboard.KEY_K ){
+			Keyboard key = event.getKey();
+			if( key == Keyboard.KEY_K ){
 				SpoutPlayer p = event.getPlayer();
 				Screen screen = p.getMainScreen();
 				if( p.getActiveScreen() == ScreenType.GAME_SCREEN ){
@@ -102,6 +105,31 @@ public class MMOSkillTree extends MMOPlugin{
 						gui.openSkillTree( p );
 					}
 				}
+			}
+			if( key == Keyboard.KEY_LCONTROL ){
+				SpoutPlayer p = event.getPlayer();
+				holdingCtrl.remove( p );
+				lastWep.remove( p );
+			}
+		}
+		
+		@Override
+		public void onKeyPressedEvent( KeyPressedEvent event){
+			Keyboard key = event.getKey();
+			if( key == Keyboard.KEY_1 ){
+				SpoutPlayer p = event.getPlayer();
+				if( holdingCtrl.contains( p ) ){
+					p.sendMessage("ctrl+1 pressed");
+					p.setItemInHand( lastWep.get( p ) );
+					p.updateInventory();
+					SkillsPlayer mmoPlayer = MMOSkillTree.mmoPlayerManager.get(p);
+					mmoPlayer.activateSkill(0);
+				}
+			}
+			if( key == Keyboard.KEY_LCONTROL ){
+				SpoutPlayer p = event.getPlayer();
+				holdingCtrl.add( p );
+				lastWep.put( p, p.getItemInHand() );
 			}
 		}
 	}

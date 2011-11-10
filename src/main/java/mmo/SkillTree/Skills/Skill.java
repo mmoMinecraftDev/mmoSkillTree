@@ -32,4 +32,6 @@ public class Skill{
 	public void removeListener( String eventName ){
 		plugin.removeSkillListener( eventName, this );
 	}
+
+	public void activate(){}
 }

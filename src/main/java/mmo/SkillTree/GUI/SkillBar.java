@@ -1,5 +1,6 @@
 package mmo.SkillTree.GUI;
 
+import java.util.ArrayList;
 import mmo.SkillTree.MMOSkillTree;
 import mmo.SkillTree.Skills.Skill;
 
@@ -17,6 +18,7 @@ public class SkillBar{
 	private MMOSkillTree plugin;
 	private GenericContainer skillBar;
 	private GenericTexture skillIcons[] = new GenericTexture[9];
+	private Skill[] skills = new Skill[9];
 
 	public SkillBar( MMOSkillTree plugin, Player player ){
 		this.plugin = plugin;
@@ -30,14 +32,20 @@ public class SkillBar{
 			.setAnchor( WidgetAnchor.CENTER_RIGHT ).setPriority( RenderPriority.Highest );
 		sPlayer.getMainScreen().attachWidget( plugin, bg );
 
-		for( int i = 0; i < skillIcons.length; i++ ){
-			skillIcons[i] = new GenericTexture();
+		for( int i = 0; i < 9; i++ ){
+			skillIcons[i] = new GenericTexture("");
 			skillIcons[i].setHeight( 16 ).setWidth( 16 ).setMargin( 2, 1 ).setFixed( true );
+			skills[i] = new Skill();
 		}
 		skillBar.addChildren( skillIcons );
 	}
 
 	public void setSkill( int pos, Skill skill ){
 		skillIcons[pos].setUrl("Magic_Arrow.png").setDirty(true);
+		skills[pos] = skill;
+	}
+
+	public Skill getSkill( int pos ){
+		return skills[pos];
 	}
 }

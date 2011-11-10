@@ -6,7 +6,7 @@ import org.bukkit.inventory.ItemStack;
 
 import mmo.Core.MMOListener;
 import mmo.Core.DamageAPI.MMODamageEvent;
-import mmo.SkillTree.MMOPlayer;
+import mmo.SkillTree.SkillsPlayer;
 import mmo.SkillTree.MMOSkillTree;
 import mmo.SkillTree.Weapons.WeaponSet;
 
@@ -31,7 +31,7 @@ public class CombatXpListener extends MMOListener {
 				WeaponSet weaponSet = itemSet(wielding);
 				int expVal = dmg;
 
-				MMOPlayer mmoPlayer = MMOSkillTree.mmoPlayerManager.get(p);
+				SkillsPlayer mmoPlayer = MMOSkillTree.mmoPlayerManager.get(p);
 				mmoPlayer.addXp(expVal, weaponSet.getCombatSkillSet());
 			}
 		}

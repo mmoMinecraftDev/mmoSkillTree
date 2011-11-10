@@ -2,7 +2,7 @@ package mmo.SkillTree.Skills;
 
 import java.util.Map.Entry;
 
-import mmo.SkillTree.MMOPlayer;
+import mmo.SkillTree.SkillsPlayer;
 import mmo.SkillTree.Set;
 import mmo.SkillTree.MMOSkillTree;
 import mmo.SkillTree.GUI.SkillSlot;
@@ -35,7 +35,7 @@ public class Tree {
 		skillTreePopup = popup;
 		Player p = (Player) sPlayer;
 		//System.out.println("tree skillSet:"+skillSet);
-		MMOPlayer mmoPlayer = MMOSkillTree.mmoPlayerManager.get(p);
+		SkillsPlayer mmoPlayer = MMOSkillTree.mmoPlayerManager.get(p);
 		Set set = mmoPlayer.getSet(skillSet);
 
 		label = new GenericLabel("You probably wish this did something, but it doesn't yet.");

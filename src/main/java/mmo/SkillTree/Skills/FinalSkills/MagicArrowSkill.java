@@ -15,9 +15,6 @@ public class MagicArrowSkill extends OnAttackSkill{
 	public MagicArrowSkill(){
 	}
 
-	public void Activate(){
-	}
-
 	@Override
 	public void onAttack( AttackEvent event ){
 		WeaponSet weaponSet = event.getWeapon();

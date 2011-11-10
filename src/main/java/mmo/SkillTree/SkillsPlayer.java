@@ -1,5 +1,6 @@
 package mmo.SkillTree;
 
+import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.Map;
 
@@ -11,21 +12,23 @@ import mmo.SkillTree.Skills.SkillSet;
 import org.bukkit.entity.Player;
 import org.getspout.spoutapi.player.SpoutPlayer;
 
-public class MMOPlayer{
+public class SkillsPlayer{
 
 	private int mana = 0;
 	private Player player;
 	private MMOXpBar xpBar;
 	private SkillBar skillBar;
-	private Map<SkillSet, Set> sets;
+	private Map<SkillSet, Set> sets = new EnumMap<SkillSet, Set>(SkillSet.class);
+	private ArrayList skills = new ArrayList();
 	private boolean hasSpout = false;
 
-	public MMOPlayer( MMOSkillTree plugin, Player player ){
+	public SkillsPlayer( MMOSkillTree plugin, Player player ){
 		System.out.println("MMOPlayer constructor");
 		this.player = player;
 		xpBar = new MMOXpBar( plugin, player );
 		skillBar = new SkillBar( plugin, player );
-		sets = new EnumMap<SkillSet, Set>(SkillSet.class);
+		//sets = new EnumMap<SkillSet, Set>(SkillSet.class);
+		//skills = new ArrayList();
 		hasSpout = ( (SpoutPlayer) player ).isSpoutCraftEnabled();
 	}
 
@@ -43,6 +46,13 @@ public class MMOPlayer{
 	public void addSet( SkillSet skillSet ){
 		sets.put( skillSet, new Set( skillSet, this ) );
 	}
+	
+	public void addSkill(Skill skill){
+		skills.add(skill);
+	}
+	public void removeSkill(Skill skill){
+		skills.remove(skill);
+	}
 
 	public Player getPlayer(){
 		return this.player;
@@ -52,8 +62,13 @@ public class MMOPlayer{
 		return mana;
 	}
 
-	public void increaseMana( int mana ){
-		this.mana = this.mana + mana;
+	public void increaseMana( int amount ){
+		mana = mana + amount;
+	}
+	public void decreaseMana( int amount ){
+		mana = mana - amount;
+		if( mana < 0 )
+			mana = 0;
 	}
 
 	public void addXp( int xpAmount, SkillSet skillSet ){
@@ -66,6 +81,10 @@ public class MMOPlayer{
 	
 	public void setSkill( int pos, Skill skill ){
 		skillBar.setSkill(pos, skill);
+	}
+	public void activateSkill( int pos ){
+		Skill skillAtPos = skillBar.getSkill(pos);
+		skillAtPos.activate();
 	}
 
 	public boolean hasSpout(){

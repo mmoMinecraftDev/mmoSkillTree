@@ -2,7 +2,7 @@ package mmo.SkillTree.Events;
 
 import java.util.HashMap;
 
-import mmo.SkillTree.MMOPlayer;
+import mmo.SkillTree.SkillsPlayer;
 import mmo.SkillTree.MMOSkillTree;
 import mmo.SkillTree.Skills.SkillSet;
 import mmo.SkillTree.Weapons.WeaponSet;
@@ -67,7 +67,7 @@ public class BlockXpListener extends BlockListener {
 				expVal = mining.containsKey(blockId) ? mining.get(blockId) : 0;
 			}
 			if (expVal > 0) {
-				MMOPlayer mmoPlayer = MMOSkillTree.mmoPlayerManager.get(p);
+				SkillsPlayer mmoPlayer = MMOSkillTree.mmoPlayerManager.get(p);
 				mmoPlayer.addXp(expVal, SkillSet.Tool);
 			}
 		}

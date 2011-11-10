@@ -12,9 +12,9 @@ public class Set{
 	public String string;
 	@SuppressWarnings("unused")
 	private SkillSet skillSet;
-	private MMOPlayer mmoPlayer;
+	private SkillsPlayer mmoPlayer;
 
-	Set( SkillSet skillSet, MMOPlayer mmoPlayer ){
+	Set( SkillSet skillSet, SkillsPlayer mmoPlayer ){
 		this.skillSet = skillSet;
 		this.string = skillSet.toString();
 		this.mmoPlayer = mmoPlayer;

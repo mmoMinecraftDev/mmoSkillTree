@@ -4,17 +4,23 @@ import mmo.SkillTree.Events.SkillUseEvent;
 
 public class OnAttackSkill extends Skill{
 
-	int uses = 5;
-
+	int uses = 3;
+	int usesLeft = 0;
+	
 	public OnAttackSkill(){
+	}
+	
+	@Override
+	public void activate(){
 		addListener( "ATTACK" );
+		usesLeft = uses;
 	}
 
 	@Override
 	public void onSkillUse( SkillUseEvent event ){
-		uses = uses - 1;
-		event.getPlayer().sendMessage( uses + " skill uses left." );
-		if( uses == 0 ){
+		usesLeft = usesLeft - 1;
+		event.getPlayer().sendMessage( usesLeft + " skill uses left." );
+		if( usesLeft == 0 ){
 			removeListener( "ATTACK" );
 		}
 	}

@@ -1,8 +1,9 @@
 package mmo.SkillTree.GUI;
 
-import mmo.SkillTree.MMOPlayer;
+import mmo.SkillTree.SkillsPlayer;
 import mmo.SkillTree.MMOSkillTree;
 import mmo.SkillTree.Skills.FinalSkills.MagicArrowSkill;
+import mmo.SkillTree.Skills.Skill;
 import mmo.SkillTree.Skills.SkillSet;
 import mmo.SkillTree.Skills.Tree;
 
@@ -39,9 +40,10 @@ public class SkillsGui{
 		label.setAlign( WidgetAnchor.BOTTOM_RIGHT ).setAnchor( WidgetAnchor.BOTTOM_RIGHT );
 		sPlayer.getMainScreen().attachWidget( plugin, label );
 		
-		MMOPlayer mmoPlayer = MMOSkillTree.mmoPlayerManager.get(p);
-		//mmoPlayer.setSkill(0, new MagicArrowSkill());
-		//mmoPlayer.add();
+		SkillsPlayer mmoPlayer = MMOSkillTree.mmoPlayerManager.get(p);
+		Skill magicArrow = new MagicArrowSkill();
+		mmoPlayer.addSkill( magicArrow );
+		mmoPlayer.setSkill( 0, magicArrow );
 	}
 
 	public void openSkillTree( Player player ){
