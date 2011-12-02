@@ -7,7 +7,7 @@ import org.bukkit.entity.Player;
 import org.getspout.spoutapi.gui.Color;
 import org.getspout.spoutapi.gui.ContainerType;
 import org.getspout.spoutapi.gui.GenericContainer;
-import org.getspout.spoutapi.gui.GenericRectange;
+import org.getspout.spoutapi.gui.GenericGradient;
 import org.getspout.spoutapi.gui.GenericTexture;
 import org.getspout.spoutapi.gui.RenderPriority;
 import org.getspout.spoutapi.gui.WidgetAnchor;
@@ -18,7 +18,7 @@ public class MMOXpBar {
 	private Player player;
 	private MMOSkillTree plugin;
 	private GenericContainer xpBox;
-	private GenericRectange xpBar;
+	private GenericGradient xpBar;
 	private GenericTexture xpIcon;
 
 	public MMOXpBar(MMOSkillTree plugin, Player player) {
@@ -49,7 +49,7 @@ public class MMOXpBar {
 
 	public void draw(float percent, SkillSet skillSet) {
 		if (xpBar == null) {
-			xpBar = new GenericRectange(new Color(0.35F, 0.75F, 0.3F));
+			xpBar = new GenericGradient(new Color(0.35F, 0.75F, 0.3F));
 			xpBar.setHeight(3).setMargin(2, 1, 3, 1).setFixed(true);
 			xpBar.setPriority(RenderPriority.Normal);
 			xpBox.addChild(xpBar);
