@@ -71,13 +71,6 @@
 	<!-- Dependencies -->
 	<dependencies>
 		<dependency>
-			<groupId>org.avaje</groupId>
-			<artifactId>ebean</artifactId>
-			<version>2.7.3</version>
-			<type>jar</type>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
 			<groupId>org.getspout</groupId>
 			<artifactId>spoutapi</artifactId>
 			<version>dev-SNAPSHOT</version>
@@ -86,7 +79,7 @@
 		<dependency>
 			<groupId>org.bukkit</groupId>
 			<artifactId>bukkit</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<version>1.0.0-R1-SNAPSHOT</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>

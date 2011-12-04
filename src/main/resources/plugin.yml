@@ -2,6 +2,6 @@ name: mmoSkillTree
 main: mmo.SkillTree.MMOSkillTree
 version: 0.2
 author: sadtaco
-depend: [mmoCore]
+depend: [Spout,mmoCore]
 
 description: mmoSkillTree provides a user interface and configurable skill obtainment dependencies.
