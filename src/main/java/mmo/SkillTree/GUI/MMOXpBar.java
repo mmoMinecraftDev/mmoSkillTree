@@ -4,6 +4,7 @@ import mmo.SkillTree.MMOSkillTree;
 import mmo.SkillTree.Skills.SkillSet;
 
 import org.bukkit.entity.Player;
+
 import org.getspout.spoutapi.gui.Color;
 import org.getspout.spoutapi.gui.ContainerType;
 import org.getspout.spoutapi.gui.GenericContainer;
@@ -14,7 +15,6 @@ import org.getspout.spoutapi.gui.WidgetAnchor;
 import org.getspout.spoutapi.player.SpoutPlayer;
 
 public class MMOXpBar {
-
 	private Player player;
 	private MMOSkillTree plugin;
 	private GenericContainer xpBox;
@@ -28,16 +28,16 @@ public class MMOXpBar {
 
 		xpBox = (GenericContainer) new GenericContainer(
 				new GenericTexture("_xpBarBg.png")
-					.setHeight(5)
-					.setWidth(182)
-					.setMargin(1, 1, 2, 1)
-					.setPriority(RenderPriority.Highest),
+						.setHeight(5)
+						.setWidth(182)
+						.setMargin(1, 1, 2, 1)
+						.setPriority(RenderPriority.Highest),
 				new GenericTexture("_xpBar.png")
-					.setHeight(5)
-					.setWidth(182)
-					.setMargin(1, 1, 2, 1)
-					.setPriority(RenderPriority.Low)
-				)
+						.setHeight(5)
+						.setWidth(182)
+						.setMargin(1, 1, 2, 1)
+						.setPriority(RenderPriority.Low)
+		)
 				.setAnchor(WidgetAnchor.TOP_CENTER)
 				.setLayout(ContainerType.OVERLAY)
 				.setWidth(182)
@@ -62,7 +62,7 @@ public class MMOXpBar {
 			xpIcon.setPriority(RenderPriority.Lowest);
 			xpBox.addChild(xpIcon);
 		} else {
-			if( !xpIcon.getUrl().equals(skillSet.toString() + ".png") ){
+			if (!xpIcon.getUrl().equals(skillSet.toString() + ".png")) {
 				xpIcon.setUrl(skillSet.toString() + ".png").setDirty(true);
 			}
 		}

@@ -2,26 +2,27 @@ package mmo.SkillTree.Events;
 
 import java.util.HashMap;
 
-import mmo.SkillTree.SkillsPlayer;
 import mmo.SkillTree.MMOSkillTree;
 import mmo.SkillTree.Skills.SkillSet;
+import mmo.SkillTree.SkillsPlayer;
 import mmo.SkillTree.Weapons.WeaponSet;
 
-import org.bukkit.event.block.BlockBreakEvent;
-import org.bukkit.event.block.BlockListener;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.block.Block;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.inventory.ItemStack;
+
 import org.getspout.spoutapi.player.SpoutPlayer;
 
-public class BlockXpListener extends BlockListener {
-
+public class BlockXpListener implements Listener {
 	private static MMOSkillTree plugin;
 
 	public BlockXpListener(MMOSkillTree plugin) {
 		BlockXpListener.plugin = plugin;
 	}
 
-	@Override
+	@EventHandler
 	public void onBlockBreak(BlockBreakEvent event) {
 		if (event.isCancelled()) {
 			return;

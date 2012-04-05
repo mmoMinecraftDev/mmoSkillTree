@@ -2,12 +2,13 @@ package mmo.SkillTree.Skills;
 
 import java.util.Map.Entry;
 
-import mmo.SkillTree.SkillsPlayer;
-import mmo.SkillTree.Set;
-import mmo.SkillTree.MMOSkillTree;
 import mmo.SkillTree.GUI.SkillSlot;
+import mmo.SkillTree.MMOSkillTree;
+import mmo.SkillTree.Set;
+import mmo.SkillTree.SkillsPlayer;
 
 import org.bukkit.entity.Player;
+
 import org.getspout.spoutapi.gui.Container;
 import org.getspout.spoutapi.gui.ContainerType;
 import org.getspout.spoutapi.gui.GenericContainer;
@@ -18,7 +19,6 @@ import org.getspout.spoutapi.gui.WidgetAnchor;
 import org.getspout.spoutapi.player.SpoutPlayer;
 
 public class Tree {
-
 	public Container box;
 	public GenericLabel label;
 	public GenericContainer infoBox;
@@ -149,7 +149,6 @@ public class Tree {
 							}
 						}
 					}
-
 				}
 			}
 		}

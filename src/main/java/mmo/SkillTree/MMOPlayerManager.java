@@ -6,7 +6,6 @@ import java.util.Map;
 import org.bukkit.entity.Player;
 
 public class MMOPlayerManager {
-
 	private Map<String, SkillsPlayer> mmoPlayers;
 	private MMOSkillTree plugin;
 

@@ -7,18 +7,18 @@ import org.getspout.spoutapi.gui.RenderPriority;
 
 public class TreeTabButton extends GenericButton {
 	SkillSet skillSet;
-	
-	public TreeTabButton(SkillSet skillSet){
+
+	public TreeTabButton(SkillSet skillSet) {
 		setSkillSet(skillSet);
 		this.setWidth(55).setHeight(21).setFixed(true);
 		this.setPriority(RenderPriority.High);
 	}
-	
-	public void setSkillSet(SkillSet skillSet){
+
+	public void setSkillSet(SkillSet skillSet) {
 		this.skillSet = skillSet;
 	}
-	
-	public SkillSet getSkillSet(){
+
+	public SkillSet getSkillSet() {
 		return skillSet;
 	}
 }

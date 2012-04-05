@@ -1,26 +1,26 @@
 package mmo.SkillTree.Events;
 
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
-
-import mmo.Core.MMOListener;
 import mmo.Core.DamageAPI.MMODamageEvent;
-import mmo.SkillTree.SkillsPlayer;
 import mmo.SkillTree.MMOSkillTree;
+import mmo.SkillTree.SkillsPlayer;
 import mmo.SkillTree.Weapons.WeaponSet;
 
-public class CombatXpListener extends MMOListener {
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.inventory.ItemStack;
 
+public class CombatXpListener implements Listener {
 	private static MMOSkillTree plugin;
 
 	public CombatXpListener(MMOSkillTree plugin) {
 		CombatXpListener.plugin = plugin;
 	}
 
-	@Override
+	@EventHandler
 	public void onMMOPVEDamage(MMODamageEvent event) {
-		MMODamageEvent mmoDmgEvent = (MMODamageEvent) event;
+		MMODamageEvent mmoDmgEvent = event;
 		int dmg = mmoDmgEvent.getDamage();
 		//Entity mob = event.getDefender();
 		Entity attacker = mmoDmgEvent.getRealAttacker();
