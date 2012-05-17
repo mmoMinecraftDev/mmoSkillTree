@@ -1,5 +1,5 @@
 name: mmoSkillTree
-version: ${releaseVersion} b${buildNumber}
+version: ${releaseVersion}.${buildNumber}
 description: Provides a user interface and configurable skill obtainment dependencies.
 author: mmoMinecraftDev
 website: http://mmo.me.uk
