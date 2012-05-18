@@ -50,7 +50,7 @@ public class SkillSlot extends GenericContainer {
 	public void sharedWidgets() {
 		//This saves some copy paste. :/
 		GenericTexture tex = new GenericTexture();
-		tex.setUrl(name + ".png");
+		tex.setUrl("res/" + name + ".png");
 		tex.setMargin(9).setWidth(16).setHeight(16).setFixed(true);
 		tex.setPriority(RenderPriority.Lowest);
 		buttonStack.addChild(tex);
@@ -61,12 +61,12 @@ public class SkillSlot extends GenericContainer {
 		buttonStack.addChild(upStack);
 		GenericTexture upButton = new GenericTexture();
 		upButton.setWidth(5).setHeight(5).setFixed(true);
-		upButton.setUrl("_skillMiniNormal.png");
+		upButton.setUrl("res/_skillMiniNormal.png");
 		upButton.setPriority(RenderPriority.Low);
 		upStack.addChild(upButton);
 		GenericTexture up = new GenericTexture();
 		up.setWidth(3).setHeight(3).setMargin(1).setFixed(true);
-		up.setUrl("_skillMiniUp.png");
+		up.setUrl("res/_skillMiniUp.png");
 		up.setPriority(RenderPriority.Lowest);
 		upStack.addChild(up);
 
@@ -76,12 +76,12 @@ public class SkillSlot extends GenericContainer {
 		buttonStack.addChild(downStack);
 		GenericTexture downButton = new GenericTexture();
 		downButton.setWidth(5).setHeight(5).setFixed(true);
-		downButton.setUrl("_skillMiniNormal.png");
+		downButton.setUrl("res/_skillMiniNormal.png");
 		downButton.setPriority(RenderPriority.Low);
 		downStack.addChild(downButton);
 		GenericTexture down = new GenericTexture();
 		down.setWidth(3).setHeight(3).setMargin(1).setFixed(true);
-		down.setUrl("_skillMiniDown.png");
+		down.setUrl("res/_skillMiniDown.png");
 		down.setPriority(RenderPriority.Lowest);
 		downStack.addChild(down);
 
@@ -102,17 +102,17 @@ public class SkillSlot extends GenericContainer {
 		sharedWidgets();
 
 		GenericTexture bgBevel = new GenericTexture();
-		bgBevel.setUrl("_skillPassiveBgBevel.png");
+		bgBevel.setUrl("res/_skillPassiveBgBevel.png");
 		bgBevel.setPriority(RenderPriority.High);
 		buttonStack.addChild(bgBevel);
 
 		GenericTexture bg = new GenericTexture();
-		bg.setUrl("_skillPassiveBg.png");
+		bg.setUrl("res/_skillPassiveBg.png");
 		bg.setPriority(RenderPriority.Normal);
 		buttonStack.addChild(bg);
 
 		GenericTexture button = new GenericTexture();
-		button.setUrl("_skillPassiveNormal.png");
+		button.setUrl("res/_skillPassiveNormal.png");
 		button.setMargin(8).setWidth(18).setHeight(18).setFixed(true);
 		button.setTooltip(name + " (Passive skill)");
 		button.setPriority(RenderPriority.Low);
@@ -125,17 +125,17 @@ public class SkillSlot extends GenericContainer {
 		sharedWidgets();
 
 		GenericTexture bgBevel = new GenericTexture();
-		bgBevel.setUrl("_skillActiveBgBevel.png");
+		bgBevel.setUrl("res/_skillActiveBgBevel.png");
 		bgBevel.setPriority(RenderPriority.High);
 		buttonStack.addChild(bgBevel);
 
 		GenericTexture bg = new GenericTexture();
-		bg.setUrl("_skillActiveBg.png");
+		bg.setUrl("res/_skillActiveBg.png");
 		bg.setPriority(RenderPriority.Normal);
 		buttonStack.addChild(bg);
 
 		GenericTexture button = new GenericTexture();
-		button.setUrl("_skillActiveNormal.png");
+		button.setUrl("res/_skillActiveNormal.png");
 		button.setMargin(8).setWidth(18).setHeight(18).setFixed(true);
 		button.setTooltip(name + " (Active skill)");
 		button.setPriority(RenderPriority.Low);
@@ -172,50 +172,50 @@ public class SkillSlot extends GenericContainer {
 	}
 
 	public SkillSlot arrowToR() {
-		arrow().setUrl("_toR.png");
-		arrowBevel().setUrl("_toRBevel.png");
+		arrow().setUrl("res/_toR.png");
+		arrowBevel().setUrl("res/_toRBevel.png");
 		return this;
 	}
 
 	public SkillSlot arrowToLongR() {
-		arrow().setUrl("_toLongR.png");
-		arrowBevel().setUrl("_toLongRBevel.png");
+		arrow().setUrl("res/_toLongR.png");
+		arrowBevel().setUrl("res/_toLongRBevel.png");
 		return this;
 	}
 
 	public SkillSlot arrowToL() {
-		arrow().setUrl("_toL.png");
-		arrowBevel().setUrl("_toLBevel.png");
+		arrow().setUrl("res/_toL.png");
+		arrowBevel().setUrl("res/_toLBevel.png");
 		return this;
 	}
 
 	public SkillSlot arrowToLongL() {
-		arrow().setUrl("_toLongL.png");
-		arrowBevel().setUrl("_toLongLBevel.png");
+		arrow().setUrl("res/_toLongL.png");
+		arrowBevel().setUrl("res/_toLongLBevel.png");
 		return this;
 	}
 
 	public SkillSlot arrowToB() {
-		arrow().setUrl("_toB.png");
-		arrowBevel().setUrl("_toBBevel.png");
+		arrow().setUrl("res/_toB.png");
+		arrowBevel().setUrl("res/_toBBevel.png");
 		return this;
 	}
 
 	public SkillSlot arrowToLongB() {
-		arrow().setUrl("_toLongB.png");
-		arrowBevel().setUrl("_toLongBBevel.png");
+		arrow().setUrl("res/_toLongB.png");
+		arrowBevel().setUrl("res/_toLongBBevel.png");
 		return this;
 	}
 
 	public SkillSlot arrowToBR() {
-		arrow().setUrl("_toBR.png");
-		arrowBevel().setUrl("_toBRBevel.png");
+		arrow().setUrl("res/_toBR.png");
+		arrowBevel().setUrl("res/_toBRBevel.png");
 		return this;
 	}
 
 	public SkillSlot arrowToBL() {
-		arrow().setUrl("_toBL.png");
-		arrowBevel().setUrl("_toBLBevel.png");
+		arrow().setUrl("res/_toBL.png");
+		arrowBevel().setUrl("res/_toBLBevel.png");
 		return this;
 	}
 }

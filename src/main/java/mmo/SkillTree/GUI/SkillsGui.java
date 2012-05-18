@@ -69,7 +69,7 @@ public class SkillsGui {
 		skillTreePopup = popup;
 
 		GenericTexture bg = new GenericTexture();
-		bg.setUrl("SkillTree.png");
+		bg.setUrl("res/SkillTree.png");
 		bg.setWidth(300).setHeight(230);
 		bg.setX(-150).setY(10);
 		bg.setPriority(RenderPriority.Highest);
@@ -140,7 +140,7 @@ public class SkillsGui {
 		buttonStack.addChild(button);*/
 
 		GenericTexture tex = new GenericTexture();
-		tex.setUrl(name + ".png");
+		tex.setUrl("res/" + name + ".png");
 		tex.setWidth(16).setHeight(16).setFixed(true);
 		tex.setMargin(2, 22, 3, 2);
 		tex.setPriority(RenderPriority.Normal);

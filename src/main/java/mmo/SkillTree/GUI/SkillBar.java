@@ -42,7 +42,7 @@ public class SkillBar {
 
 		skillBar = (GenericContainer) new GenericContainer().setAnchor(WidgetAnchor.CENTER_RIGHT).setLayout(ContainerType.VERTICAL).setPriority(RenderPriority.High).setWidth(20).setHeight(180).setX(-20).setY(-90);
 		sPlayer.getMainScreen().attachWidget(plugin, skillBar);
-		GenericTexture bg = new GenericTexture("_skillBar.png");
+		GenericTexture bg = new GenericTexture("res/_skillBar.png");
 		bg.setHeight(182).setWidth(22).setX(-22).setY(-91)
 				.setAnchor(WidgetAnchor.CENTER_RIGHT).setPriority(RenderPriority.Highest);
 		sPlayer.getMainScreen().attachWidget(plugin, bg);
@@ -56,7 +56,7 @@ public class SkillBar {
 	}
 
 	public void setSkill(int pos, Skill skill) {
-		skillIcons[pos].setUrl("Magic_Arrow.png").setDirty(true);
+		skillIcons[pos].setUrl("res/Magic_Arrow.png").setDirty(true);
 		skills[pos] = skill;
 	}
 

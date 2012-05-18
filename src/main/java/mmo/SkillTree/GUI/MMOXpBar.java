@@ -43,12 +43,12 @@ public class MMOXpBar {
 		SpoutPlayer sPlayer = (SpoutPlayer) player;
 
 		xpBox = (GenericContainer) new GenericContainer(
-				new GenericTexture("_xpBarBg.png")
+				new GenericTexture("res/_xpBarBg.png")
 						.setHeight(5)
 						.setWidth(182)
 						.setMargin(1, 1, 2, 1)
 						.setPriority(RenderPriority.Highest),
-				new GenericTexture("_xpBar.png")
+				new GenericTexture("res/_xpBar.png")
 						.setHeight(5)
 						.setWidth(182)
 						.setMargin(1, 1, 2, 1)
@@ -73,13 +73,13 @@ public class MMOXpBar {
 		percent = (float) (percent * 100 * 1.8);// the 1.8 will get it to fit to the 180px wide bar. Simple.
 		xpBar.setWidth((int) percent).setDirty(true);
 		if (xpIcon == null) {
-			xpIcon = new GenericTexture(skillSet.toString() + ".png");
+			xpIcon = new GenericTexture("res/" + skillSet.toString() + ".png");
 			xpIcon.setWidth(8).setHeight(8).setFixed(true);
 			xpIcon.setPriority(RenderPriority.Lowest);
 			xpBox.addChild(xpIcon);
 		} else {
-			if (!xpIcon.getUrl().equals(skillSet.toString() + ".png")) {
-				xpIcon.setUrl(skillSet.toString() + ".png").setDirty(true);
+			if (!xpIcon.getUrl().equals("res/" + skillSet.toString() + ".png")) {
+				xpIcon.setUrl("res/" + skillSet.toString() + ".png").setDirty(true);
 			}
 		}
 	}
